@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheet.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <title>THE DAILY SCOOP</title>
+  </head>
+
+  <body>
+    <!-- HEADER  -->
+    <header class="header">
+      <a href="main.html"
+        ><img src="img/THE_DAILY_SCOOP_LOGO.png" width="300px"
+      /></a>
+      <div class="inputSearch desktop">
+        <form id="searchForm">
+          <input
+            type="text"
+            placeholder="Search for topics, locations  sources"
+            id="searchInput"
+          />
+          <span><i class="ri-search-line"></i></span>
+        </form>
+      </div>
+
+      <nav class="desktop">
+        <ul>
+          <li onclick="search('entertainment')">ENTERTAINMENT</li>
+          <li onclick="search('BUSINESS')">BUSINESS</li>
+          <li onclick="search('sports')">SPORTS</li>
+          <li onclick="search('travel')">TRAVEL</li>
+        </ul>
+      </nav>
+      <div class="menuBtn">
+        <i class="ri-menu-4-line"></i>
+      </div>
+
+      <div class="mobile hidden">
+        <nav>
+          <ul>
+            <li onclick="search('entertainment')">ENTERTAINMENT</li>
+            <li onclick="search('BUSINESS')">BUSINESS</li>
+            <li onclick="search('sports')">SPORTS</li>
+            <li onclick="search('travel')">TRAVEL</li>
+          </ul>
+        </nav>
+        <div class="inputSearch">
+          <form id="searchFormMobile">
+            <input
+              type="text"
+              placeholder="Search for topics, locations  sources"
+              id="searchInputMobile"
+            />
+            <span><i class="ri-search-line"></i></span>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    
+    <!-- ARTICLESECTION -->
+    <section class="container">
+      <div class="article"> 
+        <div class="mainArticle"> 
+          <div class="storyTitle">
+            <h2>ENTERTAINMENT</h2>
+          </div>
+    
+          <div class="mainArticleItem">
+            <div class="mainArticleItemContent-page2">
+              <div class="mainArticleItemContentImg-page2 "><img src="img/item10.png" /></div>
+              <h3>Jay-Z wants New York City to let him open a casino in Times Square</h3>
+            <p>
+              Roc Nation said there was no better location for a Caesars Palace casino and claimed it would improve New Yorkers' lives.
+            </p>
+            <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia</h5> 
+            <br>
+            <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</h5>
+            <br>
+
+            <span>Author<h2>Jyoti Mann</h2>
+            </div>
+
+          </div>
+
+    
+
+        </div>
+        <!-- SECTION 2.1/TECH  -->
+        <div class="sideArticle"> 
+          <div class="sideArticleImg"> 
+            <img src="img/item12.png" />
+          </div>
+    
+          <div class="sideArticleContent">
+            <p>TECHNOLOGY</p>
+          </div>
+    
+          <div class="sideArticleContent">
+            <h2></h2>
+          </div>
+    
+          <div class="sideArticleContent">
+            <h2></h2>
+          </div>
+    
+          <div class="sideArticleContent">
+            <h2></h2>
+          </div>
+
+          <div class="sideArticleContent">
+            <h2></h2>
+          </div>
+          <div class="sideArticleContent">
+            <h2></h2>
+          </div>
+
+          <div class="sideArticleContent">
+            <ul>
+              <li onclick="search('Featured')">Featured</li>
+              <li  onclick="search('Popular')">Popular</li>
+              <li  onclick="search('Latest')">Latest</li>
+            </ul>
+          </div>
+          
+          <div class="sideArticleContent">
+            <h2></h2>
+          </div>
+          <div>
+
+            <div class="sideArticleContent">
+              <h2></h2>
+            </div>
+            <div class="sideArticleContent">
+              <h2></h2>
+            </div>
+           
+          </div>
+          </div>
+      </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <section>
+      <footer>
+        <div class="footerContent">
+          <div class="footerLogo">
+            <img src="img/THE_DAILY_SCOOP_LOGO.png" width="200px" />
+          </div>
+
+          <div class="gitIcon">
+            <span><i class="ri-github-fill"></i></span>
+          </div>
+          <h4>click the icon to view the git repository</h4>
+
+          <h2>
+            By Kamsiyonna<br />
+            ©2023 CheckLearn Best Team
+          </h2>
+        </div>
+      </footer>
+    </section>
+    <script src="secondPage.js"></script>
+  </body>
+</html>

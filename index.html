@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheet.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <title>THE DAILY SCOOP</title>
+  </head>
+
+  <body>
+    <!-- HEADER  -->
+    <header class="header">
+      <a href="main.html"
+        ><img src="img/THE_DAILY_SCOOP_LOGO.png" width="300px"
+      /></a>
+      <div class="inputSearch desktop">
+        <form id="searchForm">
+          <input
+            type="text"
+            placeholder="Search for topics, locations  sources"
+            id="searchInput"
+          />
+          <span><i class="ri-search-line"></i></span>
+        </form>
+      </div>
+
+      <nav class="desktop">
+        <ul>
+          <li onclick="search('entertainment')">ENTERTAINMENT</li>
+          <li onclick="search('technology')">TECHNOLOGY</li>
+          <li onclick="search('sports')">SPORTS</li>
+          <li onclick="search('travel')">TRAVEL</li>
+        </ul>
+      </nav>
+      <div class="menuBtn">
+        <i class="ri-menu-4-line"></i>
+      </div>
+
+      <div class="mobile hidden">
+        <nav>
+          <ul class="navLink">
+            <li onclick="search('chelsea')">ENTERTAINMENT</li>
+            <li onclick="search('technology')">TECHNOLOGY</li>
+            <li onclick="search('sports')">SPORTS</li>
+            <li onclick="search('travel')">TRAVEL</li>
+          </ul>
+        </nav>
+        <div class="inputSearch">
+          <form id="searchFormMobile">
+            <input
+              type="text"
+              placeholder="Search for topics, locations  sources"
+              id="searchInputMobile"
+            />
+            <span><i class="ri-search-line"></i></span>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION 1/BANNER  -->
+    <section class="container">
+      <h1>TOP STORIES</h1>
+
+      <div class="headlineContent">
+        <div class="slideshowContainer">
+          <div class="banner fade">
+            <div class="texts">
+              <a href="" class="urlLink">
+                <h1>The 2023 Stay List: World’s Best New Hotels</h1>
+              </a>
+            </div>
+
+            <div class="bannerImage">
+              <img src="img/banner.png" />
+            </div>
+          </div>
+
+          <div class="banner fade">
+            <div class="texts">
+              <a href="" class="urlLink">
+                <h1>The 2023 Stay List: World’s Best New Hotels</h1>
+              </a>
+            </div>
+
+            <div class="bannerImage">
+              <img src="img/newspaper.jpg" />
+            </div>
+          </div>
+
+          <div class="banner fade">
+            <div class="texts">
+              <a href="" class="urlLink">
+                <h1>The 2023 Stay List: World’s Best New Hotels</h1>
+              </a>
+            </div>
+
+            <div class="bannerImage">
+              <img src="img/newspaper4.jpg" />
+            </div>
+          </div>
+
+          <div class="banner fade">
+            <div class="texts">
+              <a href="" class="urlLink">
+                <h1>The 2023 Stay List: World’s Best New Hotels</h1>
+              </a>
+            </div>
+
+            <div class="bannerImage">
+              <img src="img/newspaper2.jpg" />
+            </div>
+          </div>
+
+          <div class="banner fade">
+            <div class="texts">
+              <a href="" class="urlLink">
+                <h1>The 2023 Stay List: World’s Best New Hotels</h1>
+              </a>
+            </div>
+
+            <div class="bannerImage">
+              <img src="img/newspaper3.jpg" />
+            </div>
+          </div>
+
+          <!-- Previous & Next buttons  -->
+          <a class="prev" onclick="plusSlides(-1)">❮</a>
+          <a class="next" onclick="plusSlides(1)">❯</a>
+        </div>
+
+        <!-- Index dots  -->
+        <div style="text-align: center">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+          <span class="dot" onclick="currentSlide(4)"></span>
+          <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2/ENTERTAINMENT -->
+    <section class="container">
+      <div class="article">
+        <div class="mainArticle">
+          <div class="storyTitle">
+            <h2>ENTERTAINMENT</h2>
+          </div>
+
+          <div class="mainArticleItem">
+            <div class="mainArticleItemContent">
+              <div class="mainArticleItemContentImg">
+                <img src="img/item10.png" />
+              </div>
+              <a href="" class="urlLink"
+                ><h3>
+                  Queen Elizabeth II was a blank canvas onto which scores of
+                  memes were projected.
+                </h3>
+              </a>
+              <p>2023-05-06</p>
+              <div class="publishByDate">
+                <h4>Wired</h4>
+                <span>•</span>
+                <h5>2023-05-06</h5>
+              </div>
+            </div>
+
+            <div class="mainArticleItemContent">
+              <div class="mainArticleItemContentImg">
+                <img src="img/item11.png" />
+              </div>
+              <a href="" class="urlLink"
+                ><h3>
+                  Queen Elizabeth II was a blank canvas onto which scores of
+                  memes were projected.
+                </h3>
+              </a>
+              <p>2023-05-06</p>
+              <div class="publishByDate">
+                <h4>Wired</h4>
+                <span>•</span>
+                <h5>2023-05-06</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="mainArticleItem">
+            <div class="mainArticleItemContent">
+              <div class="mainArticleItemContentImg">
+                <img src="img/item12.png" />
+              </div>
+              <a href="" class="urlLink"
+                ><h3>
+                  Queen Elizabeth II was a blank canvas onto which scores of
+                  memes were projected.
+                </h3>
+              </a>
+              <p>2023-05-06</p>
+              <div class="publishByDate">
+                <h4>Wired</h4>
+                <span>•</span>
+                <h5>2023-05-06</h5>
+              </div>
+            </div>
+
+            <div class="mainArticleItemContent">
+              <div class="mainArticleItemContentImg">
+                <img src="img/item13.png" />
+              </div>
+              <a href="" class="urlLink"
+                ><h3>
+                  Queen Elizabeth II was a blank canvas onto which scores of
+                  memes were projected.
+                </h3>
+              </a>
+              <p>2023-05-06</p>
+              <div class="publishByDate">
+                <h4>Wired</h4>
+                <span>•</span>
+                <h5>2023-05-06</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2.1/TECH  -->
+        <div class="sideArticle">
+          <div class="sideArticleImg">
+            <img src="img/item12.png" />
+          </div>
+
+          <div class="sideArticleContent">
+            <p>TECHNOLOGY</p>
+          </div>
+
+          <div class="sideArticleContent">
+            <h2></h2>
+          </div>
+
+          <div class="sideArticleContent">
+            <h2></h2>
+          </div>
+
+          <div class="sideArticleContent">
+            <h2></h2>
+          </div>
+
+          <div class="sideArticleContent">
+            <h2></h2>
+          </div>
+
+          <div class="sideArticleContent">
+            <h2></h2>
+          </div>
+
+          <div class="sideArticleContent">
+            <ul>
+              <li onclick="search('Featured')">Featured</li>
+              <li onclick="search('Popular')">Popular</li>
+              <li onclick="search('Latest')">Latest</li>
+            </ul>
+          </div>
+
+          <div class="sideArticleContent">
+            <h2></h2>
+          </div>
+          <div>
+            <div class="sideArticleContent">
+              <h2></h2>
+            </div>
+            <div class="sideArticleContent">
+              <h2></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3/SPORTS -->
+    <section class="container">
+      <div class="carousel">
+        <div class="storyTitle">
+          <h2>SPORTS</h2>
+        </div>
+
+        <div class="carouselItem">
+          <div class="carouselItemContent">
+            <div class="carouselItemContentImg">
+              <img src="img/item19.png" />
+            </div>
+            <p>carousel detail here</p>
+            <h3>ribbery</h3>
+          </div>
+
+          <div class="carouselItemContent">
+            <div class="carouselItemContentImg">
+              <img src="img/item15.png" />
+            </div>
+            <p>carousel detail here</p>
+            <h3>ribbery</h3>
+          </div>
+
+          <div class="carouselItemContent">
+            <div class="carouselItemContentImg">
+              <img src="img/item13.png" />
+            </div>
+            <p>carousel detail here</p>
+            <h3>ribbery</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4/TRAVEL -->
+    <section class="container">
+      <div class="featured">
+        <div class="storyTitle">
+          <h2>TRAVEL</h2>
+        </div>
+
+        <div class="featuredItem">
+          <div class="featuredItemContent">
+            <img src="" />
+            <h3></h3>
+          </div>
+
+          <div class="featuredItemContent">
+            <img src="" />
+            <h3></h3>
+          </div>
+
+          <div class="featuredItemContent">
+            <img src="" />
+            <h3></h3>
+          </div>
+        </div>
+        <div class="featuredItem">
+          <div class="featuredItemContent">
+            <img src="" />
+            <h3></h3>
+          </div>
+
+          <div class="featuredItemContent">
+            <img src="" />
+            <h3></h3>
+          </div>
+
+          <div class="featuredItemContent">
+            <img src="" />
+            <h3></h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <section>
+      <footer>
+        <div class="footerContent">
+          <div class="footerLogo">
+            <a href="main.html"
+              ><img src="img/THE_DAILY_SCOOP_LOGO.png" width="200px"
+            /></a>
+          </div>
+
+          <div class="gitIcon">
+            <span><i class="ri-github-fill"></i></span>
+          </div>
+          <h4>click the icon to view the git repository</h4>
+
+          <h2>
+            By Kamsiyonna<br />
+            ©2023 CheckLearn Best Team
+          </h2>
+        </div>
+      </footer>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
