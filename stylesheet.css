@@ -1,7 +1,7 @@
 * {
   margin: 0px;
   padding: 0px;
-  font-family: 'cambon', 'Poppins', sans-serif;
+  font-family: "cambon", "Poppins", sans-serif;
 }
 
 img {
@@ -20,6 +20,18 @@ img:hover {
   text-decoration: none;
 }
 
+#preloader {
+  background: #fff url(img/preloader.gif) no-repeat center center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+  background-size: 50%;
+}
+
+.hidden {
+  display: none;
+}
 /* HEADER  */
 header {
   border-bottom: 2px solid #000000;
@@ -225,7 +237,7 @@ form {
 }
 
 .container h1 {
-  font-family: 'cambon';
+  font-family: "cambon";
   font-size: 35px;
   line-height: 1.34;
   font-style: normal;
@@ -246,7 +258,7 @@ form {
 }
 
 .container .headlineContent .texts h1 {
-  font-family: 'cambon';
+  font-family: "cambon";
   font-size: 35px;
   line-height: 1.34;
   font-style: normal;
@@ -371,6 +383,7 @@ form {
   display: flex;
   box-sizing: border-box;
   gap: 20px;
+  /* justify-content: space-between; */
 }
 
 .mainArticleItem {
@@ -416,7 +429,7 @@ form {
 
 .mainArticleItemContent h3 {
   width: 100%;
-  font-family: 'cambon';
+  font-family: "cambon";
   font-size: 24px;
   line-height: 1.34;
   font-weight: 300;
@@ -435,7 +448,7 @@ h3:hover {
 }
 
 .mainArticleItemContent p {
-  font-family: 'cambon';
+  font-family: "cambon";
   font-size: 15px;
   line-height: 1.34;
   font-weight: 100;
@@ -456,7 +469,7 @@ h3:hover {
 
 .publishByDate h4,
 .publishByDate h5 {
-  font-family: 'cambon';
+  font-family: "cambon";
   font-size: 12px;
   line-height: 1.34;
   font-weight: 100;
@@ -533,7 +546,7 @@ h3:hover {
 }
 
 .sideArticleContent h2 {
-  font-family: 'cambon';
+  font-family: "cambon";
   font-size: 18px;
   line-height: 1.34;
   font-weight: lighter;
@@ -541,6 +554,12 @@ h3:hover {
   cursor: pointer;
   padding: 10px 5px;
   border-bottom: solid 1px #c1c1c1;
+
+  /* trimming texts */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: horizontal;
+  overflow: hidden;
 }
 .sideArticleContent h2:hover {
   color: #243a54;
@@ -549,7 +568,7 @@ h3:hover {
 /* STORIES */
 .storyTitle h2 {
   text-align: left;
-  font-family: 'cambon';
+  font-family: "cambon";
   font-size: 30px;
   font-weight: 300;
   color: #000;
@@ -573,7 +592,7 @@ h3:hover {
   box-shadow: 1px 1px 1px 1px rgb(78, 78, 78);
 }
 .carouselItemContent p {
-  font-family: 'cambon';
+  font-family: "cambon";
   font-size: 15px;
   line-height: 1.34;
   font-weight: 100;
@@ -587,7 +606,7 @@ h3:hover {
   overflow: hidden;
 }
 .carouselItemContent h3 {
-  font-family: 'cambon';
+  font-family: "cambon";
   font-size: 15px;
   line-height: 1.34;
   font-weight: 100;
@@ -664,7 +683,7 @@ h3:hover {
 }
 
 .featuredItem h3 {
-  font-family: 'cambon';
+  font-family: "cambon";
   font-size: 20px;
   line-height: 1.34;
   font-weight: 300;
@@ -724,13 +743,18 @@ footer {
 
 .mainArticleItemContent-page2 h3 {
   width: 100%;
-  font-family: 'cambon';
+  font-family: "cambon";
   font-size: 30px;
   line-height: 1.34;
   font-weight: 300;
   color: #000;
   cursor: pointer;
   margin-bottom: 20px;
+  /* trimming texts */
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .mainArticleItemContent-page2 h3:hover {
@@ -750,7 +774,7 @@ footer {
 
 .mainArticleItemContent-page2 p,
 .mainArticleItemContent-page2 h5 {
-  font-family: 'cambon';
+  font-family: "cambon";
   font-size: 20px;
   line-height: 1.34;
   font-weight: 100;

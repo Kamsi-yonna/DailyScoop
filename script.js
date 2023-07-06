@@ -1,12 +1,18 @@
-'strict mode';
+"strict mode";
+
+//PRELOADER
+var loader = document.getElementById("preloader");
+window.addEventListener("load", function () {
+  loader.style.display = "none";
+});
 
 //DROPDOWN MENU FUNCTION
-const mobileMenu = document.querySelector('.mobile');
-const menuBtn = document.querySelector('.menuBtn');
+const mobileMenu = document.querySelector(".mobile");
+const menuBtn = document.querySelector(".menuBtn");
 const menuBtnDisplay = true;
 
-menuBtn.addEventListener('click', () => {
-  mobileMenu.classList.toggle('hidden');
+menuBtn.addEventListener("click", () => {
+  mobileMenu.classList.toggle("hidden");
 });
 
 //BANNER SLIDESHOW
@@ -22,8 +28,8 @@ function currentSlide(n) {
 }
 
 function showSlides(n) {
-  const slides = document.getElementsByClassName('banner');
-  const dots = document.getElementsByClassName('dot');
+  const slides = document.getElementsByClassName("banner");
+  const dots = document.getElementsByClassName("dot");
 
   if (n > slides.length) {
     slideIndex = 1;
@@ -31,38 +37,38 @@ function showSlides(n) {
     slideIndex = slides.length;
   }
 
-  Array.from(slides).forEach(slide => {
-    slide.style.display = 'none';
+  Array.from(slides).forEach((slide) => {
+    slide.style.display = "none";
   });
 
-  Array.from(dots).forEach(dot => {
-    dot.classList.remove('active');
+  Array.from(dots).forEach((dot) => {
+    dot.classList.remove("active");
   });
 
-  slides[slideIndex - 1].style.display = 'block';
-  dots[slideIndex - 1].classList.add('active');
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].classList.add("active");
 }
 
 //LINK TO GITHUB
 // storing the GitHub element
-const gitIcon = document.querySelector('.gitIcon i');
+const gitIcon = document.querySelector(".gitIcon i");
 
 // Add click event listener to the icon element
-gitIcon.addEventListener('click', () => {
+gitIcon.addEventListener("click", () => {
   // Open the GitHub link in a new page
-  window.open('https://github.com/Kamsi-yonna', '_blank');
+  window.open("https://github.com/Kamsi-yonna", "_blank");
 });
 
 //FETCH
 // Setting the API key and URL
 // const apiKey = "646f6fa9592d4218b1319a268668121a";
-const apiKey = '099148be22804e849a0c6fe022b7cf5e ';
-const Url = 'https://newsapi.org/v2/everything?q=';
+const apiKey = "099148be22804e849a0c6fe022b7cf5e ";
+const Url = "https://newsapi.org/v2/everything?q=";
 
 //SHUFFLE ARRAY FUNCTION - to shuffle the indices of an array randomly.
 function shuffleArray(array) {
   // Create a new array with the same elements using the map method
-  const shuffledArray = array.map(element => element);
+  const shuffledArray = array.map((element) => element);
 
   for (let i = shuffledArray.length - 1; i > 0; i--) {
     const randomIndex = Math.floor(Math.random() * (i + 1));
@@ -84,13 +90,13 @@ async function fetchData(url) {
 
     // Check if the response is successful
     if (!response.ok) {
-      throw new Error('Request failed with status ' + response.status);
+      throw new Error("Request failed with status " + response.status);
     }
 
     // Convert the response to JSON and return the data
     return await response.json();
   } catch (error) {
-    console.log('Error:', error);
+    console.log("Error:", error);
   }
 }
 
@@ -106,8 +112,8 @@ async function bannerData(query) {
   }
 
   // Get the text and image elements from the banner section
-  const textElements = document.querySelectorAll('.banner h1');
-  const imageElements = document.querySelectorAll('.banner .bannerImage img');
+  const textElements = document.querySelectorAll(".banner h1");
+  const imageElements = document.querySelectorAll(".banner .bannerImage img");
 
   // Create an array of available article indices
   const availableIndices = Array.from(
@@ -140,10 +146,10 @@ async function bannerData(query) {
     imageElements[i].src = articleImage;
 
     // Get the urlLink element for the current iteration
-    let urlLinkElement = document.querySelectorAll('.urlLink')[i];
+    let urlLinkElement = document.querySelectorAll(".urlLink")[i];
 
     // Add a click event listener to the urlLink element
-    urlLinkElement.addEventListener('click', function (event) {
+    urlLinkElement.addEventListener("click", function (event) {
       // Prevent the default behavior of the link
       event.preventDefault();
 
@@ -151,13 +157,13 @@ async function bannerData(query) {
       urlLinkElement.href = articleURL;
 
       // Open the page in a new web screen
-      window.open(urlLinkElement.href, '_blank');
+      window.open(urlLinkElement.href, "_blank");
     });
     //to check the link
     // console.log(articleURL);
   }
 }
-bannerData('Headlines');
+bannerData("Headlines");
 
 // Function to fetch and display entertainment data
 async function entertainmentData(query) {
@@ -171,12 +177,12 @@ async function entertainmentData(query) {
   }
 
   // Get the text elements from the main article section
-  const textTitle = document.querySelectorAll('.mainArticleItemContent h3');
+  const textTitle = document.querySelectorAll(".mainArticleItemContent h3");
   const textDescription = document.querySelectorAll(
-    '.mainArticleItemContent p'
+    ".mainArticleItemContent p"
   );
-  const textAuthor = document.querySelectorAll('.mainArticleItemContent h4');
-  const textDate = document.querySelectorAll('.mainArticleItemContent h5');
+  const textAuthor = document.querySelectorAll(".mainArticleItemContent h4");
+  const textDate = document.querySelectorAll(".mainArticleItemContent h5");
 
   // Determine the loop limit based on the shorter length between text elements and article data
   const loopLimit = Math.min(textTitle.length, objectData.articles.length);
@@ -212,7 +218,7 @@ async function entertainmentData(query) {
 
       // Update the image source
       const imageElement = document.querySelectorAll(
-        '.mainArticleItemContent img'
+        ".mainArticleItemContent img"
       )[i];
       imageElement.src = articleImage;
     }
@@ -221,7 +227,7 @@ async function entertainmentData(query) {
   // Log the objectData (for debugging purposes)
   console.log(objectData);
 }
-entertainmentData('entertainment');
+entertainmentData("entertainment");
 
 // Function to fetch and display entertainment data
 // async function entertainmentData(query) {
@@ -292,8 +298,8 @@ async function techData(query) {
   }
 
   // Get the text elements
-  const textElements = document.querySelectorAll('.sideArticleContent h2');
-  const imageElement = document.querySelector('.sideArticleImg img');
+  const textElements = document.querySelectorAll(".sideArticleContent h2");
+  const imageElement = document.querySelector(".sideArticleImg img");
 
   // Create an empty array for available article indices
   const availableIndices = [];
@@ -329,7 +335,7 @@ async function techData(query) {
 
   console.log(objectData);
 }
-techData('technology');
+techData("technology");
 
 // Function to fetch and display sports data
 async function sportsData(query) {
@@ -343,8 +349,8 @@ async function sportsData(query) {
   }
 
   // Get the text elements
-  const textAuthor = document.querySelectorAll('.carouselItemContent h3');
-  const textTitle = document.querySelectorAll('.carouselItemContent p');
+  const textAuthor = document.querySelectorAll(".carouselItemContent h3");
+  const textTitle = document.querySelectorAll(".carouselItemContent p");
 
   // Create an array of available article indices
   const availableIndices = Array.from(
@@ -378,7 +384,7 @@ async function sportsData(query) {
     textTitle[i].innerHTML = articleDate;
 
     // Update the image source
-    const imageElement = document.querySelectorAll('.carouselItemContent img')[
+    const imageElement = document.querySelectorAll(".carouselItemContent img")[
       i
     ];
     imageElement.src = articleImage;
@@ -386,7 +392,7 @@ async function sportsData(query) {
 
   // console.log(objectData);
 }
-sportsData('FA CUP');
+sportsData("FA CUP");
 
 // Function to fetch and display travel data
 async function travelData(query) {
@@ -400,7 +406,7 @@ async function travelData(query) {
   }
 
   // Get the text elements
-  const textAuthor = document.querySelectorAll('.featuredItemContent h3');
+  const textAuthor = document.querySelectorAll(".featuredItemContent h3");
 
   // Create an array of available article indices
   const availableIndices = Array.from(
@@ -429,7 +435,7 @@ async function travelData(query) {
     textAuthor[i].innerHTML = articleTitle;
 
     // Update the image source
-    const imageElement = document.querySelectorAll('.featuredItemContent img')[
+    const imageElement = document.querySelectorAll(".featuredItemContent img")[
       i
     ];
     imageElement.src = articleImage;
@@ -437,7 +443,7 @@ async function travelData(query) {
 
   console.log(objectData);
 }
-travelData('places to travel');
+travelData("places to travel");
 
 // Function to update the search query for all data-fetching functions
 function updateSearchQuery(query) {
@@ -450,27 +456,27 @@ function updateSearchQuery(query) {
 }
 
 // Get the search form, input element, and search icon
-const searchForm = document.getElementById('searchForm');
-const searchInput = document.getElementById('searchInput');
-const searchIcon = document.querySelector('.ri-search-line');
+const searchForm = document.getElementById("searchForm");
+const searchInput = document.getElementById("searchInput");
+const searchIcon = document.querySelector(".ri-search-line");
 
-const navLink = document.querySelectorAll('.navLink li');
+const navLink = document.querySelectorAll(".navLink li");
 
 // Function to handle search
 function handleSearch() {
   const searchQuery = searchInput.value.trim();
   updateSearchQuery(searchQuery);
-  searchInput.value = ''; // Clear the input field
+  searchInput.value = ""; // Clear the input field
 }
 
 // Add event listener to the form
-searchForm.addEventListener('submit', function (event) {
+searchForm.addEventListener("submit", function (event) {
   event.preventDefault();
   handleSearch();
 });
 
 // Add event listener to the search icon
-searchIcon.addEventListener('click', handleSearch);
+searchIcon.addEventListener("click", handleSearch);
 
 //Adding an event listener to the nav links
 async function search(query) {

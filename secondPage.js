@@ -1,179 +1,427 @@
 "strict mode";
-// DROPDOWN MENU FUNCTION
-let mobileMenu = document.querySelector(".mobile");
-let menuBtn = document.querySelector(".menuBtn");
-let menuBtnDisplay = true;
+
+//PRELOADER
+var loader = document.getElementById("preloader");
+window.addEventListener("load", function () {
+  loader.style.display = "none";
+});
+
+//DROPDOWN MENU FUNCTION
+const mobileMenu = document.querySelector(".mobile");
+const menuBtn = document.querySelector(".menuBtn");
+const menuBtnDisplay = true;
 
 menuBtn.addEventListener("click", () => {
   mobileMenu.classList.toggle("hidden");
 });
-//
-//
-//
-//
-//
 
-//GITHUB LINK
-// Get the GitHub icon element
+//BANNER SLIDESHOW
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides((slideIndex += n));
+}
+
+function currentSlide(n) {
+  showSlides((slideIndex = n));
+}
+
+function showSlides(n) {
+  const slides = document.getElementsByClassName("banner");
+  const dots = document.getElementsByClassName("dot");
+
+  if (n > slides.length) {
+    slideIndex = 1;
+  } else if (n < 1) {
+    slideIndex = slides.length;
+  }
+
+  Array.from(slides).forEach((slide) => {
+    slide.style.display = "none";
+  });
+
+  Array.from(dots).forEach((dot) => {
+    dot.classList.remove("active");
+  });
+
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].classList.add("active");
+}
+
+//LINK TO GITHUB
+// storing the GitHub element
 const gitIcon = document.querySelector(".gitIcon i");
 
 // Add click event listener to the icon element
 gitIcon.addEventListener("click", () => {
   // Open the GitHub link in a new page
-  window.open("https://github.com/Kamsi-yonna", "_blank");
+  window.open("https://github.com/Kamsi-yonna/DailyScoop", "_blank");
 });
 
-const apiKey = "099148be22804e849a0c6fe022b7cf5e";
+//FETCH
+// STORING THE APIKEY AND URL
+// const apiKey = "646f6fa9592d4218b1319a268668121a";
+const apiKey = "099148be22804e849a0c6fe022b7cf5e ";
 const Url = "https://newsapi.org/v2/everything?q=";
 
-//SECOND PAGE
-async function selectedNews(query) {
+//SHUFFLE ARRAY FUNCTION - to shuffle the indices of an array randomly.
+function shuffleArray(array) {
+  // Create a new array with the same elements using the map method
+  const shuffledArray = array.map((element) => element);
+
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+
+    // Swap elements using destructuring assignment
+    [shuffledArray[i], shuffledArray[randomIndex]] = [
+      shuffledArray[randomIndex],
+      shuffledArray[i],
+    ];
+  }
+  return shuffledArray;
+}
+
+// FUNCTION TO FECTH API AND CORRECT ERRORS
+async function fetchData(url) {
   try {
-    const response = await fetch(`${Url}${query}&apiKey=${apiKey}`);
-    // console.log(`${Url}${query}&apiKey=${apiKey}`);
+    // Fetch data from the API
+    const response = await fetch(url);
 
     // Check if the response is successful
     if (!response.ok) {
       throw new Error("Request failed with status " + response.status);
     }
 
-    // Convert the response to JSON
-    const objectData = await response.json();
-
-    // Get the text elements
-    const textTitle = document.querySelectorAll(".mainArticleItemContent-page2 h3");
-    const textDescription = document.querySelectorAll(
-      ".mainArticleItemContent-page2 p"
-    );
-    const textAuthor = document.querySelectorAll(
-      ".mainArticleItemContent-page2 h2"
-    );
-
-
-    // Determine the loop limit based on the shorter length between textElements and objectData.articles
-    const loopLimit = Math.min(textTitle.length, objectData.articles.length);
-
-    // Loop through the articles and update the corresponding elements
-    for (let i = 0; i < loopLimit; i++) {
-      // Generate a random index within the range
-      const randomIndex = Math.trunc(
-        Math.random() * objectData.articles.length
-      );
-      console.log(randomIndex);
-
-      // Get the data using the random index
-      const articleTitle = objectData.articles[randomIndex].title;
-      const articleImage = objectData.articles[randomIndex].urlToImage;
-      const articleDescription = objectData.articles[randomIndex].description;
-      const articleAuthor = objectData.articles[randomIndex].author;
-
-      // If image is not available, skip to the next iteration
-      if (!articleImage) {
-        // console.log("Picture not available");
-        continue;
-      } else {
-        // Update the title element
-        textTitle[i].innerHTML = articleTitle;
-        textDescription[i].innerHTML = articleDescription;
-        textAuthor[i].innerHTML = articleAuthor;
-
-        // Update the image source
-        const imageElement = document.querySelectorAll(
-          ".mainArticleItemContentImg-page2 img"
-        )[i];
-        imageElement.src = articleImage;
-
-        // console.log("Picture available");
-      }
-    }
-
-    console.log(objectData);
+    // Convert the response to JSON and return the data
+    return await response.json();
   } catch (error) {
     console.log("Error:", error);
   }
 }
 
-// Call the fetchData function to start fetching data
-selectedNews("entertainment");
+// BANNER/HEADLINES DATA
+async function bannerData(query) {
+  const apiUrl = `${Url}${query}&apiKey=${apiKey}`;
 
+  // Fetch data using the common fetchData function
+  const objectData = await fetchData(apiUrl);
 
-//FETCH FOR THE  SECTION 2.1/TECH
-async function techData(query) {
-  try {
-    const response = await fetch(`${Url}${query}&apiKey=${apiKey}`);
+  if (!objectData) {
+    return; // Return early if there was an error fetching the data
+  }
 
-    // Check if the response is successful
-    if (!response.ok) {
-      throw new Error("Request failed with status " + response.status);
+  // Get the text and image elements from the banner section
+  const textElements = document.querySelectorAll(".banner h1");
+  const imageElements = document.querySelectorAll(".banner .bannerImage img");
+
+  // Create an array of available article indices
+  const availableIndices = Array.from(
+    { length: objectData.articles.length },
+    (_, index) => index
+  );
+
+  // Shuffle the available indices randomly
+  const shuffledIndices = shuffleArray(availableIndices);
+
+  // Determine the loop limit based on the shorter length between textElements and shuffledIndices
+  const loopLimit = Math.min(textElements.length, shuffledIndices.length);
+
+  // Loop through the text and image elements
+  for (let i = 0; i < loopLimit; i++) {
+    const articleIndex = shuffledIndices[i];
+    const articleTitle = objectData.articles[articleIndex].title;
+    const articleImage = objectData.articles[articleIndex].urlToImage;
+    const articleURL = objectData.articles[articleIndex].url;
+
+    // If image URL is not available, skip to the next iteration
+    if (!articleImage) {
+      continue;
     }
 
-    // Convert the response to JSON
-    const objectData = await response.json();
+    // Update the title element with the article title
+    textElements[i].innerHTML = articleTitle;
 
-    // Get the text elements
-    const textElements = document.querySelectorAll(".sideArticleContent h2");
-    const imageElement = document.querySelector(".sideArticleImg img");
-    // Determine the loop limit based on the shorter length between textElements and objectData.articles
-    const loopLimit = Math.min(textElements.length, objectData.articles.length);
+    // Update the image source with the article image
+    imageElements[i].src = articleImage;
 
-    // Loop through the articles and update the corresponding elements
-    for (let i = 0; i < loopLimit; i++) {
-      // Generate a random index within the range
-      const randomIndex = Math.floor(
-        Math.random() * objectData.articles.length
-      );
+    // Get the urlLink element for the current iteration
+    let urlLinkElement = document.querySelectorAll(".urlLink")[i];
 
-      // Get the article title and image URL using the random index
-      const articleTitle = objectData.articles[randomIndex].title;
-      const articleImage = objectData.articles[randomIndex].urlToImage;
+    // Add a click event listener to the urlLink element
+    urlLinkElement.addEventListener("click", function (event) {
+      // Prevent the default behavior of the link
+      event.preventDefault();
 
-      // If image is not available, skip to the next iteration
-      if (!articleImage) {
-        continue;
-      }
+      // Update the href attribute with the article URL
+      urlLinkElement.href = articleURL;
 
-      // Update the title element
-      textElements[i].innerHTML = articleTitle;
+      // Open the page in a new web screen
+      window.open(urlLinkElement.href, "_blank");
+    });
+    //to check the link
+    // console.log(articleURL);
+  }
+}
+bannerData("Headlines");
 
-      // // Update the category element
-      // categoryElement.innerHTML = query.toUpperCase();
+// Function to fetch and display entertainment data
+async function entertainmentData(query) {
+  const apiUrl = `${Url}${query}&apiKey=${apiKey}`;
+
+  // Fetch data using the common fetchData function
+  const objectData = await fetchData(apiUrl);
+
+  if (!objectData) {
+    return; // Return early if there was an error fetching the data
+  }
+
+  // Get the text elements from the main article section
+  const textTitle = document.querySelectorAll(".mainArticleItemContent h3");
+  const textDescription = document.querySelectorAll(
+    ".mainArticleItemContent p"
+  );
+  const textAuthor = document.querySelectorAll(".mainArticleItemContent h4");
+  const textDate = document.querySelectorAll(".mainArticleItemContent h5");
+
+  // Determine the loop limit based on the shorter length between text elements and article data
+  const loopLimit = Math.min(textTitle.length, objectData.articles.length);
+
+  // Shuffle the indices using the shuffleArray function
+  const shuffledIndices = shuffleArray(
+    Array.from({ length: objectData.articles.length }, (_, index) => index)
+  );
+
+  // Loop through the articles and update the corresponding elements
+  for (let i = 0; i < loopLimit; i++) {
+    const randomIndex = shuffledIndices[i];
+
+    // Get the data using the random index
+    const articleTitle = objectData.articles[randomIndex].title;
+    const articleImage = objectData.articles[randomIndex].urlToImage;
+    const articleDescription = objectData.articles[randomIndex].description;
+    const articleAuthor = objectData.articles[randomIndex].source.name;
+    const articleDate = objectData.articles[randomIndex].publishedAt.substring(
+      0,
+      10
+    );
+
+    // If image is not available, skip to the next iteration
+    if (!articleImage) {
+      continue;
+    } else {
+      // Update the title, description, and author elements
+      textTitle[i].innerHTML = articleTitle;
+      textDescription[i].innerHTML = articleDescription;
+      textAuthor[i].innerHTML = articleAuthor;
+      textDate[i].innerHTML = articleDate;
 
       // Update the image source
+      const imageElement = document.querySelectorAll(
+        ".mainArticleItemContent img"
+      )[i];
       imageElement.src = articleImage;
+    }
+  }
 
-      // console.log("Picture available:", articleImage);
+  // Log the objectData (for debugging purposes)
+  console.log(objectData);
+}
+entertainmentData("entertainment");
+
+// TECH DATA
+async function techData(query) {
+  const apiUrl = `${Url}${query}&apiKey=${apiKey}`;
+
+  // Fetch data using the common fetchData function
+  const objectData = await fetchData(apiUrl);
+
+  if (!objectData) {
+    return; // Return early if there was an error fetching the data
+  }
+
+  // Get the text elements
+  const textElements = document.querySelectorAll(".sideArticleContent h2");
+  const imageElement = document.querySelector(".sideArticleImg img");
+
+  // Create an empty array for available article indices
+  const availableIndices = [];
+
+  // Populate the availableIndices array
+  for (let index = 0; index < objectData.articles.length; index++) {
+    availableIndices.push(index);
+  }
+
+  // Shuffle the available indices randomly
+  const shuffledIndices = shuffleArray(availableIndices);
+
+  // Determine the loop limit based on the shorter length between textElements and shuffledIndices
+  const loopLimit = Math.min(textElements.length, shuffledIndices.length);
+
+  // Loop through the text and image elements
+  for (let i = 0; i < loopLimit; i++) {
+    const articleIndex = shuffledIndices[i];
+    const articleTitle = objectData.articles[articleIndex].title;
+    const articleImage = objectData.articles[articleIndex].urlToImage;
+
+    // If image URL is not available, skip to the next iteration
+    if (!articleImage) {
+      continue;
     }
 
-    console.log(objectData);
-  } catch (error) {
-    console.log("Error:", error);
-  }
-}
+    // Update the title element
+    textElements[i].innerHTML = articleTitle;
 
-// Call the fetchData function to start fetching data
+    // Update the image source
+    imageElement.src = articleImage;
+  }
+
+  console.log(objectData);
+}
 techData("technology");
 
-// async function handleFormSubmit(e, inputElement) {
-//   e.preventDefault();
-//   console.log(inputElement.value);
+// SPORTS DATA
+async function sportsData(query) {
+  const apiUrl = `${Url}${query}&apiKey=${apiKey}`;
 
-//   const data = await fetchData(inputElement.value);
-//   console.log(data);
-//   renderMain(data.articles);
-// }
+  // Fetch data using the common fetchData function
+  const objectData = await fetchData(apiUrl);
 
-// const searchBtn = document.getElementById("searchForm");
-// const searchBtnMobile = document.getElementById("searchFormMobile");
+  if (!objectData) {
+    return; // Return early if there was an error fetching the data
+  }
 
-// const searchInput = document.getElementById("searchInput");
-// const searchInputMobile = document.getElementById("searchInputMobile");
+  // Get the text elements
+  const textAuthor = document.querySelectorAll(".carouselItemContent h3");
+  const textTitle = document.querySelectorAll(".carouselItemContent p");
 
-// searchBtn.addEventListener("submit", (e) => handleFormSubmit(e, searchInput));
-// searchBtnMobile.addEventListener("submit", (e) =>
-//   handleFormSubmit(e, searchInputMobile)
-// );
+  // Create an array of available article indices
+  const availableIndices = Array.from(
+    { length: objectData.articles.length },
+    (_, index) => index
+  );
 
-// async function search(query) {
-//   const data = await fetchData(query);
-//   renderMain(data.articles);
-// }
+  // Shuffle the available indices randomly
+  const shuffledIndices = shuffleArray(availableIndices);
+
+  // Determine the loop limit based on the shorter length between textTitle and shuffledIndices
+  const loopLimit = Math.min(textTitle.length, shuffledIndices.length);
+
+  // Loop through the articles and update the corresponding elements
+  for (let i = 0; i < loopLimit; i++) {
+    const articleIndex = shuffledIndices[i];
+    const articleImage = objectData.articles[articleIndex].urlToImage;
+    const articleTitle = objectData.articles[articleIndex].title;
+    const articleDate = objectData.articles[articleIndex].publishedAt.substring(
+      0,
+      10
+    );
+
+    // If image is not available, skip to the next iteration
+    if (!articleImage) {
+      continue;
+    }
+
+    // Update the author and title elements
+    textAuthor[i].innerHTML = articleTitle;
+    textTitle[i].innerHTML = articleDate;
+
+    // Update the image source
+    const imageElement = document.querySelectorAll(".carouselItemContent img")[
+      i
+    ];
+    imageElement.src = articleImage;
+  }
+
+  // console.log(objectData);
+}
+sportsData("FA CUP");
+
+// TRAVEL DATA
+async function travelData(query) {
+  const apiUrl = `${Url}${query}&apiKey=${apiKey}`;
+
+  // Fetch data using the common fetchData function
+  const objectData = await fetchData(apiUrl);
+
+  if (!objectData) {
+    return; // Return early if there was an error fetching the data
+  }
+
+  // Get the text elements
+  const textAuthor = document.querySelectorAll(".featuredItemContent h3");
+
+  // Create an array of available article indices
+  const availableIndices = Array.from(
+    { length: objectData.articles.length },
+    (_, index) => index
+  );
+
+  // Shuffle the available indices randomly
+  const shuffledIndices = shuffleArray(availableIndices);
+
+  // Determine the loop limit based on the shorter length between textAuthor and shuffledIndices
+  const loopLimit = Math.min(textAuthor.length, shuffledIndices.length);
+
+  // Loop through the articles and update the corresponding elements
+  for (let i = 0; i < loopLimit; i++) {
+    const articleIndex = shuffledIndices[i];
+    const articleImage = objectData.articles[articleIndex].urlToImage;
+    const articleTitle = objectData.articles[articleIndex].title;
+
+    // If image is not available, skip to the next iteration
+    if (!articleImage) {
+      continue;
+    }
+
+    // Update the author element
+    textAuthor[i].innerHTML = articleTitle;
+
+    // Update the image source
+    const imageElement = document.querySelectorAll(".featuredItemContent img")[
+      i
+    ];
+    imageElement.src = articleImage;
+  }
+
+  console.log(objectData);
+}
+travelData("places to travel");
+
+// Function to update the search query for all data-fetching functions
+function updateSearchQuery(query) {
+  entertainmentData(query);
+  techData(query);
+  sportsData(query);
+  bannerData(query);
+  travelData(query);
+  sportsData(query);
+}
+
+// Get the search form, input element, and search icon
+const searchForm = document.getElementById("searchForm");
+const searchInput = document.getElementById("searchInput");
+const searchIcon = document.querySelector(".ri-search-line");
+
+const navLink = document.querySelectorAll(".navLink li");
+
+// Function to handle search
+function handleSearch() {
+  const searchQuery = searchInput.value.trim();
+  updateSearchQuery(searchQuery);
+  searchInput.value = ""; // Clear the input field
+}
+
+// Add event listener to the form
+searchForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  handleSearch();
+});
+
+// Add event listener to the search icon
+searchIcon.addEventListener("click", handleSearch);
+
+//Adding an event listener to the nav links
+async function search(query) {
+  updateSearchQuery(query);
+}
